@@ -12,13 +12,12 @@ def main():
     n = 20 
     bernoulli_matrix = create_bernoullii_matrix(p,N,n) 
     result_mean = [np.mean(bernoulli_matrix[i]) for i in range(N)]
-    epsilon_random, y_axis = empirial_epsilon(result_mean, 50)
-    
-    hoeffding_bound = [2*math.pow(math.e, (-2)*n*(math.pow(epsilon_random[i],2))) for i in range(len(epsilon_random))] 
-    plot_care(epsilon_random, y_axis, hoeffding_bound) 
+    x_epsilon_random, y_empirical_prob = empirical_prob(result_mean, 50)
+    y_hoeffding_bound = [2*math.pow(math.e, (-2)*n*(math.pow(x_epsilon_random[i],2))) for i in range(len(x_epsilon_random))] 
+    plot_care(x_epsilon_random, y_empirical_prob, y_hoeffding_bound) 
 
 
-def empirial_epsilon(result_mean: list, num_of_epsilon: int ) -> tuple : 
+def empirical_prob(result_mean: list, num_of_epsilon: int ) -> tuple : 
     epsilon_random = np.linspace(0,1,num_of_epsilon)
     y_axis = [] 
     for j in range(num_of_epsilon) : 
