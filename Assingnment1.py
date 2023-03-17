@@ -11,7 +11,6 @@ def main():
     N = 200000 
     n = 20 
     bernoulli_matrix = create_bernoullii_matrix(p,N,n) 
-    print(len(bernoulli_matrix))
     result_mean = [np.mean(bernoulli_matrix[i]) for i in range(N)]
     epsilon_random, y_axis = empirial_epsilon(result_mean, 50)
     
@@ -19,7 +18,7 @@ def main():
     plot_care(epsilon_random, y_axis, hoeffding_bound) 
 
 
-def empirial_epsilon(result_mean: list, num_of_epsilon: int ) -> tuple(2) : 
+def empirial_epsilon(result_mean: list, num_of_epsilon: int ) -> tuple : 
     epsilon_random = np.linspace(0,1,num_of_epsilon)
     y_axis = [] 
     for j in range(num_of_epsilon) : 
