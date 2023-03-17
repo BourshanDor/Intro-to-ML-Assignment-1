@@ -10,16 +10,15 @@ def main():
     p = 0.5 
     N = 200000 
     n = 20 
+    
     bernoulli_matrix = create_bernoullii_matrix(p,N,n) 
-    print(bernoulli_matrix)
     result_mean = [np.mean(bernoulli_matrix[i]) for i in range(n)]
-    print(result_mean)
-    epsilon_random, y_axis = empirial_epsilon(result_mean, 50)
-    hoeffding_bound = [2*math.pow(math.e, (-2)*N*(math.pow(epsilon_random[i],2))) for i in range(len(epsilon_random))] 
-    plot_care(epsilon_random, y_axis, hoeffding_bound) 
+    x_epsilon_random, y_empirical_prob = empirical_prob(result_mean, 50)
+    y_hoeffding_bound = [2*math.pow(math.e, (-2)*N*(math.pow(x_epsilon_random[i],2))) for i in range(len(x_epsilon_random))] 
+    plot_care(x_epsilon_random, y_empirical_prob, y_hoeffding_bound) 
 
 
-def empirial_epsilon(result_mean, num_of_epsilon,) : 
+def empirical_prob(result_mean, num_of_epsilon,) : 
     epsilon_random = np.linspace(0,1,num_of_epsilon)
     y_axis = [] 
     for j in range(num_of_epsilon) : 
